@@ -12,7 +12,7 @@
  */
 
 namespace PodelAPI\Controller\Requests;
-require_once __DIR__ . '../../conf/config.php';
+require_once __DIR__ . '/../../conf/config.php';
 
 abstract class JodelAPIRequest
 {
@@ -20,17 +20,20 @@ abstract class JodelAPIRequest
     private $endpoint;
     private $parameter;
     private $HTTPheader;
+    private $method;
 
     /**
      * JodelAPIRequest constructor.
      * @param $baseURL
      * @param $endpoint
-     * @param $parameter
+     * @param array $parameter
+     * @param $method
      */
-    public function __construct($baseURL, $endpoint, $parameter = array()) {
+    public function __construct($baseURL, $endpoint, $parameter = array(), $method = 'POST') {
         $this->baseURL = $baseURL;
         $this->endpoint = $endpoint;
         $this->parameter = $parameter;
+        $this->method = $method;
 
         $this->HTTPheader = array(
             'X-Timestamp: ' . date('Y-m-d\TH:i:s\Z'),
@@ -40,6 +43,13 @@ abstract class JodelAPIRequest
             'User-Agent: ' . USER_AGENT,
             'Content-Type: application/json'
         );
+
+        if($method == 'GET') {
+            foreach ($parameter as $key => $value) {
+                $this->baseURL .= '&' . urlencode($key) . '=' . urlencode($value);
+            }
+            $this->parameter = array();
+        }
     }
 
     /**
@@ -68,6 +78,13 @@ abstract class JodelAPIRequest
      */
     public function getHTTPheader() {
         return $this->HTTPheader;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethod(): string {
+        return $this->method;
     }
 
 }

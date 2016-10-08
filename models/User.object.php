@@ -6,7 +6,7 @@
  */
 
 /**
- * Module: [INSERT]
+ * Module: The user config model.
  * File: PodelAPI/User.object.php
  * Depends: [NONE]
  */

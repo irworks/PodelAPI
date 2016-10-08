@@ -21,17 +21,21 @@ class CURL
     private $parameter = array();
     /** @var array An optional array of custom header fields. */
     private $header = array();
+    /** @var string $method - HTTP Method */
+    private $method = 'POST';
 
     /**
      * CURL constructor.
      * @param null $url
      * @param null $parameter
+     * @param string $method
      * @param array $header
      */
-    function __construct($url = null, $parameter = null, $header = array()) {
+    function __construct($url = null, $parameter = null, $method = 'POST', $header = array()) {
         $this->url = $url;
         $this->parameter = $parameter;
         $this->header = $header;
+        $this->method = $method;
     }
 
     /**
@@ -53,16 +57,19 @@ class CURL
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $this->url);
-        curl_setopt($ch, CURLOPT_POST, count($this->parameter));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $requestString);
+
+        if($this->method !== 'POST') {
+            curl_setopt($ch, CURLOPT_POST, count($this->parameter));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $requestString);
+        }
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->header);
 
         $result = curl_exec($ch);
 
         curl_close($ch);
-
-        return $result;
+        return json_decode($result, true);
     }
 
     /**

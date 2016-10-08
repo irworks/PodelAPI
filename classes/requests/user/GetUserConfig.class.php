@@ -12,7 +12,8 @@
  */
 
 namespace PodelAPI\Controller\Requests;
-require_once __DIR__ . '../JodelAPIRequest.class.php';
+require_once __DIR__ . '/../JodelAPIRequest.class.php';
+require_once __DIR__ . '/../../../models/User.object.php';
 
 class GetUserConfig extends JodelAPIRequest
 {

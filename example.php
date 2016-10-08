@@ -16,6 +16,7 @@ require_once __DIR__ . '/classes/JodelAPIController.class.php';
 
 $controller = new \PodelAPI\Controller\JodelAPIController(AUTH_TOKEN);
 
-var_dump($controller->getJodelsComboByLocation('7.249665114077564', '51.44943728721945'));
+/* Get all jodels at given coords. */
+var_dump($controller->getJodelsComboByLocation('8.449665114077564', '50.14943728721945'));
 
 ?>

@@ -12,13 +12,17 @@
  */
 
 namespace PodelAPI\Controller;
+use PodelAPI\Controller\Requests\JodelAPIRequest;
+use PodelAPI\Models\BaseModel;
+
 require_once __DIR__ . '/CURL.class.php';
-require_once __DIR__ . '/JodelAPIRequest.class.php';
+require_once __DIR__ . '/requests/JodelAPIRequest.class.php';
+require_once __DIR__ . '../models/BaseModel.object.php';
 
 abstract class APIController
 {
-    protected function sendAPIRequest(JodelAPIRequest $request) {
+    protected function sendAPIRequest(JodelAPIRequest $request) : BaseModel {
         $curl = new CURL($request->getBaseURL() . $request->getEndpoint() . '?access_token=' . $request->getAuthToken(), $request->getParameter(), $request->getHTTPheader());
-        $curl->performRequest(true);
+        return $curl->performRequest(true);
     }
 }

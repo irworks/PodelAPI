@@ -11,14 +11,15 @@
  * Depends: [NONE]
  */
 
-namespace PodelAPI\Controller;
+namespace PodelAPI\Controller\Requests;
+require_once __DIR__ . '../../conf/config.php';
 
 abstract class JodelAPIRequest
 {
     private $baseURL;
     private $endpoint;
     private $parameter;
-    private $authToken;
+    private $authToken = AUTH_TOKEN;
     private $HTTPheader;
 
     /**

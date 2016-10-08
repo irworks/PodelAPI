@@ -16,15 +16,23 @@ require_once __DIR__ . '/BaseModel.object.php';
 
 class User extends BaseModel
 {
+    /** @var  bool $moderator - Is the user a moderator? */
     protected $moderator;
+    /** @var  enum $user_type - Student, pupil etc. (Currently null) */
     protected $user_type;
+    /** @var  array $experiments - Beta features enabled for user. */
     protected $experiments;
+    /** @var  array $followed_channels - The channels the user follows (BETA feature) */
     protected $followed_channels;
+    /** @var  int $channels_follow_limit - The max amount of channels to follow. */
     protected $channels_follow_limit;
     protected $triple_feed_enabled;
+    /** @var  bool $home_set - is the home set. Currently no option in-app? */
     protected $home_set;
     protected $home_name;
+    /** @var  string $home_name - Auto generated, short alpha-numeric location name */
     protected $location;
+    /** @var  int $karma - The users karma. */
     protected $karma;
 
     /**

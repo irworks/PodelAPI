@@ -7,7 +7,7 @@
 
 /**
  * Module: [INSERT]
- * File: PodelAPI/test.php
+ * File: PodelAPI/example.php
  * Depends: [NONE]
  */
 

@@ -19,7 +19,6 @@ abstract class JodelAPIRequest
     private $baseURL;
     private $endpoint;
     private $parameter;
-    private $authToken = AUTH_TOKEN;
     private $HTTPheader;
 
     /**
@@ -53,13 +52,6 @@ abstract class JodelAPIRequest
      */
     public function getParameter(): array {
         return $this->parameter;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAuthToken() {
-        return $this->authToken;
     }
 
     /**

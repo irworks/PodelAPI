@@ -21,8 +21,8 @@ require_once __DIR__ . '../models/BaseModel.object.php';
 
 abstract class APIController
 {
-    protected function sendAPIRequest(JodelAPIRequest $request) : BaseModel {
-        $curl = new CURL($request->getBaseURL() . $request->getEndpoint() . '?access_token=' . $request->getAuthToken(), $request->getParameter(), $request->getHTTPheader());
+    protected function sendAPIRequest(JodelAPIRequest $request, $auth_token = '') : BaseModel {
+        $curl = new CURL($request->getBaseURL() . $request->getEndpoint() . '?access_token=' . $auth_token, $request->getParameter(), $request->getHTTPheader());
         return $curl->performRequest(true);
     }
 }

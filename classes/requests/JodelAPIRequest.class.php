@@ -31,6 +31,15 @@ abstract class JodelAPIRequest
         $this->baseURL = $baseURL;
         $this->endpoint = $endpoint;
         $this->parameter = $parameter;
+
+        $this->HTTPheader = array(
+            'X-Timestamp: ' . date('Y-m-d\TH:i:s\Z'),
+            'Accept: */*',
+            'X-Api-Version: ' . API_VERSION,
+            'X-Client-Type: ' . CLIENT_TYPE . '_' . APP_VERSION,
+            'User-Agent: ' . USER_AGENT,
+            'Content-Type: application/json'
+        );
     }
 
     /**

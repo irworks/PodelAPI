@@ -22,6 +22,6 @@ class GetUserKarma extends JodelAPIRequest
      * Gets the karma from the old v2 API.
      */
     public function __construct() {
-        parent::__construct(BASE_URL_V2, '/users/karma');
+        parent::__construct(BASE_URL_V2, '/users/karma', array(), 'GET');
     }
 }

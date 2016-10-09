@@ -32,10 +32,10 @@ class CURL
      * @param array $header
      */
     function __construct($url = null, $parameter = null, $method = 'POST', $header = array()) {
-        $this->url = $url;
-        $this->parameter = $parameter;
-        $this->header = $header;
-        $this->method = $method;
+        $this->url          = $url;
+        $this->parameter    = $parameter;
+        $this->header       = $header;
+        $this->method       = $method;
     }
 
     /**
@@ -56,13 +56,16 @@ class CURL
         }
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, $this->url);
-
-        if($this->method !== 'POST') {
+        if($this->method === 'POST') {
             curl_setopt($ch, CURLOPT_POST, count($this->parameter));
             curl_setopt($ch, CURLOPT_POSTFIELDS, $requestString);
+        } else if($this->method === 'GET') {
+            foreach ($this->parameter as $key => $value) {
+                $this->url .= '&' . urlencode($key) . '=' . urlencode($value);
+            }
         }
 
+        curl_setopt($ch, CURLOPT_URL, $this->url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->header);
 

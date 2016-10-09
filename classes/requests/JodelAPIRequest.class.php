@@ -30,10 +30,10 @@ abstract class JodelAPIRequest
      * @param $method
      */
     public function __construct($baseURL, $endpoint, $parameter = array(), $method = 'POST') {
-        $this->baseURL = $baseURL;
-        $this->endpoint = $endpoint;
-        $this->parameter = $parameter;
-        $this->method = $method;
+        $this->baseURL      = $baseURL;
+        $this->endpoint     = $endpoint;
+        $this->parameter    = $parameter;
+        $this->method       = $method;
 
         $this->HTTPheader = array(
             'X-Timestamp: ' . date('Y-m-d\TH:i:s\Z'),
@@ -43,13 +43,6 @@ abstract class JodelAPIRequest
             'User-Agent: ' . USER_AGENT,
             'Content-Type: application/json'
         );
-
-        if($method == 'GET') {
-            foreach ($parameter as $key => $value) {
-                $this->baseURL .= '&' . urlencode($key) . '=' . urlencode($value);
-            }
-            $this->parameter = array();
-        }
     }
 
     /**

@@ -29,6 +29,6 @@ class GetCombo extends JodelAPIRequest
             'lng'       => $longitude,
             'lat'       => $latitude,
             'stickies'  => $stickies
-        ));
+        ), 'GET');
     }
 }

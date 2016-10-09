@@ -16,8 +16,10 @@ require_once __DIR__ . '/APIController.class.php';
 require_once __DIR__ . '/requests/user/GetUserConfig.class.php';
 require_once __DIR__ . '/requests/user/GetUserKarma.class.php';
 require_once __DIR__ . '/requests/posts/location/GetCombo.class.php';
+require_once __DIR__ . '/requests/posts/channel/GetDiscussed.class.php';
 
 use PodelAPI\Controller\Requests\GetCombo;
+use PodelAPI\Controller\Requests\GetDiscussed;
 use PodelAPI\Controller\Requests\GetUserConfig;
 use PodelAPI\Controller\Requests\GetUserKarma;
 use PodelAPI\Models\Jodel;
@@ -68,13 +70,29 @@ class JodelAPIController extends APIController
      * @return array
      */
     public function getJodelsComboByLocation($longitude = 1.0, $latitude = 1.0, $stickies = false) : array {
+        return $this->convertArrayArrayToObjectArray($this->sendAPIRequest(new GetCombo($longitude, $latitude, $stickies), $this->auth_token)['recent'], Jodel::class);
+    }
+
+    /**
+     * Get the Jodels for a channel.
+     * @param string $channel
+     * @return array
+     */
+    public function getJodelsForChannel($channel = '') : array {
+        return $this->convertArrayArrayToObjectArray($this->sendAPIRequest(new GetDiscussed($channel), $this->auth_token)['posts'], Jodel::class);
+    }
+
+    /**
+     * Help method to create an array of objects of the given type out of an array of k=>v arrays.
+     * @param array $data
+     * @param $class
+     * @return array
+     */
+    private function convertArrayArrayToObjectArray($data = array(), $class) :array {
         $output = array();
-        $data   = $this->sendAPIRequest(new GetCombo($longitude, $latitude, $stickies), $this->auth_token)['recent'];
-
         foreach ($data as $item) {
-            $output[] = new Jodel($item);
+            $output[] = new $class($item);
         }
-
         return $output;
     }
 }

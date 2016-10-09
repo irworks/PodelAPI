@@ -16,4 +16,6 @@ Or:
   
 ###Calls:
 - `getUserConfig()` **=>** Gets an `User` model with your config.
+- `getUserKarma()` **=>** Gets an `User` model with karma, completes a optionally given `User` model.
 - `getJodelsComboByLocation(lng, lat, sticky)` **=>** Gets an array of the Jodels around given coordinates.
+-- ``

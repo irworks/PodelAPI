@@ -22,6 +22,6 @@ class GetUserConfig extends JodelAPIRequest
      * Gets the user Model from the API.
      */
     public function __construct() {
-        parent::__construct(BASE_URL_V3, '/user/config');
+        parent::__construct(BASE_URL_V3, '/user/config', array(), 'GET');
     }
 }

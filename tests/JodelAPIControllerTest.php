@@ -28,4 +28,10 @@ class JodelAPIControllerTest extends PHPUnit_Framework_TestCase
         $jodels = $this->jodelAPIController->getJodelsComboByLocation('7.249665114077564', '51.44943728721945');
         $this->assertNotNull($jodels, 'Jodels from API are null.');
     }
+
+    public function testgetUserKarma() {
+        $karmaUser = $this->jodelAPIController->getUserKarma();
+        $this->assertNotNull($karmaUser, 'Karma user is null!');
+        $this->assertGreaterThan(2, $karmaUser->getKarma(), 'The karma is lower than 2.');
+    }
 }

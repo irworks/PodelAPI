@@ -18,8 +18,10 @@ $controller = new \PodelAPI\Controller\JodelAPIController(AUTH_TOKEN);
 
 /* Get your config. */
 var_dump($controller->getUserConfig());
+/* Get the karma */
+var_dump($controller->getUserKarma());
 
 /* Get all jodels at given coords. */
-//var_dump($controller->getJodelsComboByLocation('8.449665114077564', '50.14943728721945'));
+var_dump($controller->getJodelsComboByLocation('8.449665114077564', '50.14943728721945'));
 
 ?>
